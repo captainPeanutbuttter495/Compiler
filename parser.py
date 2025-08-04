@@ -50,3 +50,18 @@ def expect(tokens, expected_type, expected_value=None):
 
     # removes token from the list and returns it
     return tokens.pop(0)
+
+# implement grammer rule
+def parse_statement(tokens):
+
+    # expect "return" keyword
+    expect(tokens, "KEYWORD", "return")
+
+    # parse the expression
+    expr = parse_exp(tokens)
+
+    # expect semicolon
+    expect(tokens, "SEMICOLON")
+
+    # return a Return AST node wrapping the expression
+    return Return(expr)
