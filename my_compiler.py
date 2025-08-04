@@ -71,7 +71,7 @@ def main():
 
             tokens = tokenize(source)
             parse_program(tokens)
-            system.exit(0)
+            sys.exit(0)
 
         s_file = compile(preprocessed_file, tmp_dir)
         output_file = os.path.splitext(input_file)[0]

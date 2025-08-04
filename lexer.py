@@ -48,7 +48,7 @@ def tokenize(input_string):
 
                     # check if token needs to store values 
                     # i.e var names or numbers
-                    if token_type in ("IDENT", "CONSTANT"):
+                    if token_type in ("IDENT", "CONSTANT", "KEYWORD"):
                         tokens.append(Token(token_type, matched_text))
 
                     else:
@@ -57,8 +57,8 @@ def tokenize(input_string):
                     # remove matched part
                     input_string = input_string[len(matched_text):]
                     break
-
             if not matched:
                 raise Exception("Unrecognized token: " + input_string)
 
     return tokens
+
