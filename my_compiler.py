@@ -13,9 +13,9 @@ def preprocesses(input_file, tmp_dir):
     # Run the preprocessor
     try:
         subprocess.run(
-            ["gcc", "-E", "-P", input_file, "-o", i_path],
-            check=True
-        )
+                ["gcc", "-E", "-P", input_file, "-o", i_path],
+                check=True
+                )
     except subprocess.CalledProcessError:
         print("[Error] Preprocessing failed.")
         sys.exit(1)
@@ -65,11 +65,18 @@ def main():
                 print(token)
             sys.exit(0)
 
+        if "--parse" in flags:
+            with open(preprocessed_file) as f:
+                source = f.read()
+
+            tokens = tokenize(source)
+            parse_program(tokens)
+            system.exit(0)
+
         s_file = compile(preprocessed_file, tmp_dir)
         output_file = os.path.splitext(input_file)[0]
         assemble_link(s_file, output_file)
         print("[INFO] Done! Can now run executable")
-
 
 if __name__ == "__main__":
     main()
