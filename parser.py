@@ -65,3 +65,14 @@ def parse_statement(tokens):
 
     # return a Return AST node wrapping the expression
     return Return(expr)
+
+def parse_exp(tokens):
+    # expects next token to be a "CONSTANT
+    # extract token's value
+    token = expect(tokens, "CONSTANT")
+
+    # convert to an integer
+    integer_value = int(token.value)
+
+    # return Constant
+    return Constant(integer_value)
