@@ -27,3 +27,16 @@ def generate_function(c_func):
 
     # returns an assembly_nodes. Function node
     return Function(name, instructions)
+
+# Converts a Return AST node into assembly instructions
+# Emits a mov from expression into %eax, followed by ret
+def generate_statement(stmt):
+    expression = stmt.value
+    src_operand = generate_exp(expression)
+    dst_operand = Register()
+
+    mov_instr = Mov(src_operand, dst_operand)
+    ret_instr = Ret()
+
+    return [mov_instr, ret_instr]
+
