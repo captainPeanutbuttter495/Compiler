@@ -16,7 +16,7 @@ class Function:
         self.instructions = instructions
 
     def __repr__(self):
-        return f"Function(\n name={repr(self.name)}\n instructions={repr(self.instructions)}\n)"
+        return f"Function(\n name={repr(self.name)},\n instructions={repr(self.instructions)}\n)"
 
 # 'mov' instruction in x64 assembly
 # copies a value from src to dist
@@ -26,4 +26,29 @@ class Mov:
         self.dst = dst
 
     def __repr__(self):
-        return f"Mov(\n src={repr(self.src)},\n dst={repr(self.dst)}\)"
+        return f"Mov(\n src={repr(self.src)},\n dst={repr(self.dst)}\n)"
+
+# represents a constant operand
+# used as the source in 'mov' instruction
+class Ret:
+    def __init__(self):
+        pass
+
+    def __repr__(self):
+        return "Ret()"
+
+class Imm:
+    def __init__(self, value):
+        self.value = value
+
+    def __repr__(self):
+        return f"Imm({repr(self.value)})"
+
+# represents the %eax register in x64 assembly
+# used as the destination in 'mov' instructions
+class Register:
+    def __init__(self):
+        pass
+
+    def __repr__(self):
+        return "Register()"
