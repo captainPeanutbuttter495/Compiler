@@ -12,3 +12,18 @@ def generate_program(c_ast_program):
     # return new assembly AST Programe node
     # this is the root of assembly program
     return Program(asm_function)
+
+# takes C AST Function node
+def generate_function(c_func):
+
+    # extracts a string
+    name = c_func.name
+
+    # extracts a Return node
+    body = c_func.body
+
+    # converts return statement into a list of assembly instructions
+    instructions = generate_statement(body)
+
+    # returns an assembly_nodes. Function node
+    return Function(name, instructions)
