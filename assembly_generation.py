@@ -40,3 +40,6 @@ def generate_statement(stmt):
 
     return [mov_instr, ret_instr]
 
+# converts a Constant expression into an Imm operand for assembly
+def generate_exp(exp):
+    return Imm(exp.value)
