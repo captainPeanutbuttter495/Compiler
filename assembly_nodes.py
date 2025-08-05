@@ -17,3 +17,13 @@ class Function:
 
     def __repr__(self):
         return f"Function(\n name={repr(self.name)}\n instructions={repr(self.instructions)}\n)"
+
+# 'mov' instruction in x64 assembly
+# copies a value from src to dist
+class Mov:
+    def __init__(self, src, dst):
+        self.src = src
+        self.dst = dst
+
+    def __repr__(self):
+        return f"Mov(\n src={repr(self.src)},\n dst={repr(self.dst)}\)"
