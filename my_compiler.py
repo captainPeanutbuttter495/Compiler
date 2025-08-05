@@ -5,6 +5,8 @@ import tempfile
 import os
 import subprocess
 from lexer import tokenize, Token, TOKEN_PATTERNS
+from parser import parse_program
+from assembly_generation import generate_program
 
 
 def preprocesses(input_file, tmp_dir):
@@ -59,7 +61,6 @@ def main():
             with open(preprocessed_file) as f:
                 source = f.read()
 
-
             tokens = tokenize(source)
             for token in tokens:
                 print(token)
@@ -72,6 +73,16 @@ def main():
             tokens = tokenize(source)
             parse_program(tokens)
             sys.exit(0)
+
+        if "--codegen" in flags:
+            with open(preprocessed_file) as f:
+                source = f.read()
+
+            tokens = tokenize(source)
+            c_ast = parse_program(tokens)
+            asm_ast = generate_program(c_ast)
+            sys.exit(0)
+
 
         s_file = compile(preprocessed_file, tmp_dir)
         output_file = os.path.splitext(input_file)[0]

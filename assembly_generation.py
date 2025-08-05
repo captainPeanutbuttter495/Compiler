@@ -1,4 +1,5 @@
 from assembly_nodes import Program
+from assembly_nodes import Imm, Register, Mov, Ret, Function, Program
 
 # entry point for code gen phase
 # takes C AST root node from ast_node class
