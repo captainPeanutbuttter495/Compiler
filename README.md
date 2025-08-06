@@ -87,6 +87,7 @@ Execution
 $ ./test
 
 $ echo $?
+
 42
 
 📌 Supported C Subset
