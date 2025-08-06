@@ -1,4 +1,3 @@
-from assembly_nodes import Program
 from assembly_nodes import Imm, Register, Mov, Ret, Function, Program
 
 # entry point for code gen phase

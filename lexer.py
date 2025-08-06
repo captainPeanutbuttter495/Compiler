@@ -58,7 +58,6 @@ def tokenize(input_string):
                     input_string = input_string[len(matched_text):]
                     break
             if not matched:
-                raise Exception("Unrecognized token: " + input_string)
+                raise SyntaxError(f"Unrecognized token: {input_string[:10]!r}")
 
     return tokens
-
