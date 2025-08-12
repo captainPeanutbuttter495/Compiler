@@ -26,3 +26,11 @@ class Constant:
 
     def __repr__(self):
         return f"Constant({repr(self.value)})"
+
+class Unary:
+    def __init__(self, operator, expr):
+        self.value = operator
+        self.function = expr
+
+    def __repr__(self):
+        return f"Unary(\n operator={repr(self.operator)},\n expr={repr(self.expr)}\n)"

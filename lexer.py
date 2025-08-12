@@ -22,6 +22,10 @@ TOKEN_PATTERNS = [
     (re.compile(r"\{"), "LBRACE"),
     (re.compile(r"\}"), "RBRACE"),
     (re.compile(r";"), "SEMICOLON"),
+    (re.compile(r"--"), "DECREMENT"),
+    (re.compile(r"-"), "NEGATION"),
+    (re.compile(r"~"), "BITWISE"),
+
 ]
 
 # function to take entire string input
