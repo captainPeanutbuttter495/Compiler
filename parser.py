@@ -30,6 +30,8 @@ def parse_function(tokens):
     body = parse_statement(tokens)
 
     expect(tokens, "RBRACE")
+    expect(tokens, "BITWISE")
+    expect(tokens, "NEGATE")
 
     return Function(name_token.value, body)
 
@@ -67,12 +69,40 @@ def parse_statement(tokens):
     return Return(expr)
 
 def parse_exp(tokens):
-    # expects next token to be a "CONSTANT
-    # extract token's value
-    token = expect(tokens, "CONSTANT")
+    next_token = peek(tokens)
 
-    # convert to an integer
-    integer_value = int(token.value)
+    if next_token.type == "CONSTANT":
+        token = take_token(tokens) # remove from token list
+        value = int(token.value) # convert string -> integer
+        return Constant(value) # return AST node
 
-    # return Constant
-    return Constant(integer_value)
+    # checks for negation or bitwise operators
+    elif next_token.type == "NEGATION" or next_token.type == "BITWISE":
+        # removes operator token from token list
+        token = take_token(tokens) 
+
+        # stores operator type as string
+        operator = token.type
+
+        # recursively parses operand
+        parse_exp(token)
+
+        # creates and returns Unary AST node
+        return Unary(operator, expr)
+
+    elif next_token.type == "LPAREN":
+        # takens in Left parenthesis
+        take_token(tokens)
+        parse_exp(token)
+        expect(tokens, "RPAREN")
+        return expr
+
+    # reject inputs such as --2
+    elif next_token.type == "DECREMENT":
+        raise SyntaxError("Unsupported operator '--'")
+
+    # if token doesn't match any valid form of <exp> give an error
+    else:
+        raise SyntaxError("Malformed expression")
+
+
